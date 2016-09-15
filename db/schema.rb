@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160914083255) do
+ActiveRecord::Schema.define(version: 20160915051047) do
 
   create_table "registrations", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "subject_id"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
     t.decimal  "grade",      precision: 1, scale: 2
-    t.index ["subject_id"], name: "index_registrations_on_subject_id"
+    t.integer  "section_id"
+    t.index ["section_id"], name: "index_registrations_on_section_id"
     t.index ["user_id"], name: "index_registrations_on_user_id"
   end
 
@@ -26,6 +26,16 @@ ActiveRecord::Schema.define(version: 20160914083255) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "sections", force: :cascade do |t|
+    t.integer  "subject_id"
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["subject_id"], name: "index_sections_on_subject_id"
+    t.index ["user_id"], name: "index_sections_on_user_id"
   end
 
   create_table "subjects", force: :cascade do |t|

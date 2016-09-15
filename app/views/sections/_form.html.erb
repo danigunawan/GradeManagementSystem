@@ -1,0 +1,7 @@
+<%= simple_form_for @section do |f| %>
+  <%= f.input :name, label: 'Section' %>
+  <%= f.input :subject_id, collection: Subject.all, label_method: :course_name, label: 'Subject', include_blank: false %>
+  <%= f.hidden_field :user_id, :value => current_user.id %>
+  <%= f.button :submit, class: 'btn btn-primary' %>
+  <%= link_to "Back", :back, class: 'btn btn-default'%>
+<% end %>

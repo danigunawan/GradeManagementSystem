@@ -4,8 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
          
-  has_many :registrations
+  has_many :registrations, dependent: :destroy
   has_many :subjects, through: :registrations      
+  has_many :sections
   belongs_to :role
   
   after_initialize :set_default_role, if: :new_record?

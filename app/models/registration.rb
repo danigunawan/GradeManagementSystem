@@ -1,4 +1,4 @@
 class Registration < ApplicationRecord
   belongs_to :user
-  belongs_to :subject
+  belongs_to :section
 end

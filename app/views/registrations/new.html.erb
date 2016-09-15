@@ -1,3 +1,36 @@
 <h2>New Registered Subject</h2>
 
-<%= render 'form'%>
+  <%= select_tag 'subject', options_from_collection_for_select(@subjects, 'id', 'course_name'), :onchange => "changeOptions()" %>
+
+<%= simple_form_for @registration do |f| %>
+  <%= f.input :section_id, collection: {}, label: 'Section', include_blank: false %>
+  <%= f.hidden_field :user_id, :value => current_user.id %>
+  <% if current_user.has_role?('teacher') %>
+  <%= f.input :grade, label: 'Grade' %>
+  <% end %>
+  <%= f.button :submit, class: 'btn btn-primary' %>
+  <%= link_to "Back", :back, class: 'btn btn-default'%>
+<% end %>
+
+<script>
+
+  function change_select(data) {
+    $('#registration_section_id').empty()
+    $.each(data, function(i, section){
+        var option = new Option(section[0], section[1]); 
+        $('#registration_section_id').append(option);
+    });
+  };
+  
+  function changeOptions() {
+    var option = $( "#subject option:selected" ).val();
+    $.ajax({
+        url: "/registrations/section_list/" + option,
+        type: 'post',
+    }).done(function (data) {
+        change_select(data);
+    });
+  }
+  
+  $( document ).ready( changeOptions );
+</script>

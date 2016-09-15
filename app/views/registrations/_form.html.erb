@@ -1,5 +1,9 @@
-<%= simple_form_for @register do |f| %>
-  <%= f.input :subject_id, collection: Subject.all, label_method: :course_name, label: 'Subject', include_blank: false %>
-  <%= f.input :user_id, collection: User.all, label: 'User', include_blank: false %>
-  <%= f.button :submit %>
+<%= simple_form_for @registration do |f| %>
+  <%= f.input :section_id, collection: @sections, label: 'Section', include_blank: false %>
+  <%= f.hidden_field :user_id, :value => @registration.user.id %>
+  <% if current_user.has_role?('teacher') %>
+  <%= f.input :grade, label: 'Grade' %>
+  <% end %>
+  <%= f.button :submit, class: 'btn btn-primary' %>
+  <%= link_to "Back", :back, class: 'btn btn-default'%>
 <% end %>
