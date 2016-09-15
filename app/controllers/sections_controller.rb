@@ -3,7 +3,7 @@ class SectionsController < ApplicationController
   load_and_authorize_resource
   
   def index
-    @subjects = Subject.includes(:sections)
+    @subjects = Subject.joins(:sections).distinct
   end
   
   def create

@@ -8,12 +8,12 @@ class Ability
       if user.has_role?('admin')
         can :manage, :all
       elsif user.has_role?('teacher')
-        can :read, :all
-        can :manage, Registration
-        cannot :destroy, :registration  
-        cannot :create, :registration
+        can :read, Subject
+        can :manage, [Section, Registration]
+        cannot [:destroy, :create], Registration
       else
-        can :read, :all
+        can :read, Subject
+        cannot :manage, [Role, Section]
         can :manage, Registration
       end
     #

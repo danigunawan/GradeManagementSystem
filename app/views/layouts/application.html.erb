@@ -15,18 +15,26 @@
               <li class = 'nav-item'>
                 <%= link_to "Edit Account", edit_user_registration_path %>
               </li>
+              <% if can? :read, Subject %>
               <li class = 'nav-item'>
                 <%= link_to "Subjects", home_path %>
               </li>
+              <% end %>
+              <% if can? :read, Section %>
               <li class = 'nav-item'>
                 <%= link_to "Sections", sections_path %>
               </li>
+              <% end %>
+              <% if can? :read, Registration %>
               <li class = 'nav-item'>
                 <%= link_to "Register Subjects", registrations_path%>
               </li>
+              <% end %>
+              <% if can? :read, Role %>
               <li class = 'nav-item'>
                 <%= link_to "Roles", roles_path%>
               </li>
+              <% end %>
               <li class = 'nav-item'>
                 <%= link_to "Logout", destroy_user_session_path, method: :delete %>
               </li>

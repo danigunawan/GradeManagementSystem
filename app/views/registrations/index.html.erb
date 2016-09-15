@@ -8,7 +8,7 @@
     <th>Course Name</th>
     <th>Section</th>
     <th>Grade</th>
-    <% if can?(:update, Registration) && can?(:destroy, Registration)%>
+    <% if can?(:update, Registration) || can?(:destroy, Registration)%>
     <th colspan = '2'>Actions</th>
     <% end %>
   </thead>
@@ -18,10 +18,10 @@
     <td><%= register.section.subject.course_name %></td>
     <td><%= register.section.name %></td>
     <td><%= register.grade.blank? ? "Unavailable" : register.grade %></td>
-    <% if can? :create, Registration %>
+    <% if can? :update, Registration %>
     <td><%= link_to 'Edit', edit_registration_path(register.id, register.section.subject_id), class: 'btn btn-default'%>
     <% end %>
-    <% if can? :create, Registration %>
+    <% if can? :destroy, Registration %>
     <%= link_to 'Delete', registration_path(register.id), method: :delete, class: 'btn btn-danger', data: {confirm: "Are you sure?"}%>
     <% end %>
     </td>

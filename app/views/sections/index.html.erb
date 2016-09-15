@@ -1,4 +1,4 @@
-<% if can? :create, Registration %>
+<% if can? :create, Section %>
 <%= link_to 'Add Section', new_section_path, class: 'btn btn-primary'%><br>
 <% end %>
 
@@ -9,8 +9,12 @@
       <% unless subject.sections.blank? %>
         <% subject.sections.each do |section|%>
           <%= section.name %> 
+          <% if can? :create, Section %>
           <%= link_to 'Edit', edit_section_path(section.id), class: 'btn btn-default'%>
+          <% end %>
+          <% if can? :create, Section %>
           <%= link_to 'Delete', section_path(section.id), method: :delete, class: 'btn btn-danger', data: {confirm: "Are you sure?"}%><br>
+          <% end %>
         <% end %>
       <% end %>
       <br>
