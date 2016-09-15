@@ -1,0 +1,5 @@
+<%= simple_form_for @register do |f| %>
+  <%= f.input :subject_id, collection: Subject.all, label_method: :course_name, label: 'Subject', include_blank: false %>
+  <%= f.input :user_id, collection: User.all, label: 'User', include_blank: false %>
+  <%= f.button :submit %>
+<% end %>

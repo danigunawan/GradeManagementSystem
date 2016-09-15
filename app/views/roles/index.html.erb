@@ -1,0 +1,30 @@
+<% if can?(:create, Role) %>
+<%= link_to 'Add Role', new_role_path, class: 'btn btn-primary'%>
+<% end %>
+<% if !@roles.blank? %>
+
+<table class = 'table table-responsive table-striped'>
+  <thead>
+    <th>Name</th>
+    <% if can?(:update, Role) && can?(:destroy, Role)%>
+    <th colspan = '2'>Actions</th>
+    <% end %>
+  </thead>
+
+  <% @roles.each do |role|%>
+  <tr>
+    <td><%= role.name %></td>
+    <% if can? :update, Role %>
+    <td><%= link_to 'Edit', edit_role_path(role.id), class: 'btn btn-default'%>
+    <% end %>
+    
+    <% if can? :destroy, Role %>
+    <%= link_to 'Delete', role_path(role.id), method: :delete, class: 'btn btn-danger', data: {confirm: "Are you sure?"}%>
+    <% end %>
+    </td>
+  </tr>
+  <% end %>
+</table>
+<% else %>
+No Roles Yet.
+<% end %>

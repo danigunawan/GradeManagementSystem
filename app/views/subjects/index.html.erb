@@ -1,0 +1,31 @@
+<% if can? :create, Subject %>
+<%= link_to 'Add Subject', new_subject_path, class: 'btn btn-primary'%>
+<% end %>
+<% if !@subjects.blank? %>
+
+<table class = 'table table-responsive table-striped'>
+  <thead>
+    <th>Course Code</th>
+    <th>Course Name</th>
+    <% if can?(:update, Subject) && can?(:destroy, Subject)%>
+    <th colspan = '2'>Actions</th>
+    <% end %>
+  </thead>
+
+  <% @subjects.each do |subject|%>
+  <tr>
+    <td><%= subject.course_code %></td>
+    <td><%= subject.course_name %></td>
+    <% if can? :update, Subject %>
+    <td><%= link_to 'Edit', edit_subject_path(subject.id), class: 'btn btn-default'%>
+    <% end %>
+    <% if can? :destroy, Subject %>
+    <%= link_to 'Delete', subject_path(subject.id), method: :delete, class: 'btn btn-danger', data: {confirm: "Are you sure?"}%>
+    <% end %>
+    </td>
+  </tr>
+  <% end %>
+</table>
+<% else %>
+No Subjects Yet.
+<% end %>
