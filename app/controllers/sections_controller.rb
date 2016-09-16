@@ -3,7 +3,7 @@ class SectionsController < ApplicationController
   load_and_authorize_resource
   
   def index
-    @subjects = Subject.joins(:sections).distinct
+    @subjects = Subject.includes(:sections => [:user]).order('sections.name DESC').distinct
   end
   
   def create
@@ -25,7 +25,7 @@ class SectionsController < ApplicationController
   end
   
   private
-  
+
   def set_section
     @section = Section.find(params[:id])
   end

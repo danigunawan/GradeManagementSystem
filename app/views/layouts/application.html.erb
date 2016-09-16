@@ -40,8 +40,7 @@
               </li>
             </ul>
         </div>
-        <div class = 'col-sm-10 col-md-10 col-lg-10'>
-          <div class = 'row'>
+        <div class = 'col-sm-10 col-md-10 col-lg-10' >
             <% unless alert.blank? %>
               <%= alert %>
             <% end %>
@@ -49,7 +48,6 @@
               <%= notice %>
             <% end %>
             <%= yield %>
-          </div>
         </div>
   </body>
 </html>

@@ -14,6 +14,7 @@
   </thead>
 
   <% @registrations.each do |register|%>
+   <% if can? :manage, register %>
   <tr>
     <td><%= register.section.subject.course_name %></td>
     <td><%= register.section.name %></td>
@@ -26,6 +27,7 @@
     <% end %>
     </td>
   </tr>
+    <% end %>
   <% end %>
 </table>
 <% else %>

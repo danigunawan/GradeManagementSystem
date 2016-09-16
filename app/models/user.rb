@@ -9,6 +9,10 @@ class User < ApplicationRecord
   has_many :sections
   belongs_to :role
   
+  validates_presence_of :name, :username
+  validates_uniqueness_of :username
+  
+  
   after_initialize :set_default_role, if: :new_record?
 
   def set_default_role

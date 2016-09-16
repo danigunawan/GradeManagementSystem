@@ -1,7 +1,7 @@
 <%= simple_form_for @registration do |f| %>
   <%= f.input :section_id, collection: @sections, label: 'Section', include_blank: false %>
   <%= f.hidden_field :user_id, :value => @registration.user.id %>
-  <% if current_user.has_role?('teacher') %>
+  <% unless current_user.has_role?('student') %>
   <%= f.input :grade, label: 'Grade' %>
   <% end %>
   <%= f.button :submit, class: 'btn btn-primary' %>
