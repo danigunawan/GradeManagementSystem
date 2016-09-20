@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160915051047) do
+ActiveRecord::Schema.define(version: 20160920083117) do
 
   create_table "registrations", force: :cascade do |t|
     t.integer  "user_id"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
-    t.decimal  "grade",      precision: 1, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.float    "grade"
     t.integer  "section_id"
     t.index ["section_id"], name: "index_registrations_on_section_id"
     t.index ["user_id"], name: "index_registrations_on_user_id"

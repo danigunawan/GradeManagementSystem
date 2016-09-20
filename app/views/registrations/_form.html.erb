@@ -2,7 +2,7 @@
   <%= f.input :section_id, collection: @sections, label: 'Section', include_blank: false %>
   <%= f.hidden_field :user_id, :value => @registration.user.id %>
   <% unless current_user.has_role?('student') %>
-  <%= f.input :grade, label: 'Grade' %>
+  <%= f.input :grade, input_html: { min: '1', max: '5', step: '0.25' }, label: 'Grade' %>
   <% end %>
   <%= f.button :submit, class: 'btn btn-primary' %>
   <%= link_to "Back", :back, class: 'btn btn-default'%>

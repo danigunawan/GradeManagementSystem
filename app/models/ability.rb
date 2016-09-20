@@ -9,15 +9,18 @@ class Ability
         can :manage, :all
       elsif user.has_role?('teacher')
         can :read, Subject
+        can :read, Section
         can :manage, Section, :user_id => user.id
         
         user.sections.pluck(:id).each do |section_id|
-          can :manage, Registration, :section_id => section_id
+          can :update, Registration, :section_id => section_id
         end
+        can :read, Registration
+        
         cannot [:destroy, :create], Registration
       else
-        can :read, Subject
-        cannot :manage, [Role, Section]
+        cannot :manage, Section
+        can :read, Section
         can :manage, Registration
       end
     #

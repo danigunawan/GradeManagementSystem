@@ -17,22 +17,17 @@
               </li>
               <% if can? :read, Subject %>
               <li class = 'nav-item'>
-                <%= link_to "Subjects", home_path %>
+                <%= link_to "Subjects", subjects_path %>
               </li>
               <% end %>
               <% if can? :read, Section %>
               <li class = 'nav-item'>
-                <%= link_to "Sections", sections_path %>
+                <%= link_to "Sections", home_path %>
               </li>
               <% end %>
               <% if can? :read, Registration %>
               <li class = 'nav-item'>
                 <%= link_to "Register Subjects", registrations_path%>
-              </li>
-              <% end %>
-              <% if can? :read, Role %>
-              <li class = 'nav-item'>
-                <%= link_to "Roles", roles_path%>
               </li>
               <% end %>
               <li class = 'nav-item'>
@@ -41,6 +36,7 @@
             </ul>
         </div>
         <div class = 'col-sm-10 col-md-10 col-lg-10' >
+          <div style = 'padding: 10px;'>
             <% unless alert.blank? %>
               <%= alert %>
             <% end %>
@@ -48,6 +44,7 @@
               <%= notice %>
             <% end %>
             <%= yield %>
+          </div>
         </div>
   </body>
 </html>

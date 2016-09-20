@@ -2,7 +2,6 @@
 <%= link_to 'Add Registered Subject', new_registration_path, class: 'btn btn-primary'%>
 <% end %>
 <% if !@registrations.blank? %>
-
 <table class = 'table table-responsive table-striped'>
   <thead>
     <th>Course Name</th>
@@ -14,11 +13,11 @@
   </thead>
 
   <% @registrations.each do |register|%>
-   <% if can? :manage, register %>
+   <% if can? :read, register %>
   <tr>
     <td><%= register.section.subject.course_name %></td>
     <td><%= register.section.name %></td>
-    <td><%= register.grade.blank? ? "Unavailable" : register.grade %></td>
+    <td><%= register.grade.blank? ? "Unavailable" : register.grade.to_s %></td>
     <% if can? :update, Registration %>
     <td><%= link_to 'Edit', edit_registration_path(register.id, register.section.subject_id), class: 'btn btn-default'%>
     <% end %>

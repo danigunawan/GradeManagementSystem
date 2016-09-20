@@ -3,11 +3,10 @@ class RegistrationsController < ApplicationController
   load_and_authorize_resource
   
   def index
-    
     unless current_user.has_role?('student')
       @registrations = Registration.includes(:section => [:subject])
     else
-      @registrations = Registration.includes(:section => [:subject]).where(user_id: current_user.id)
+      @registrations << Registration.includes(:section => [:subject]).where(user: current_user)
     end
   end
   

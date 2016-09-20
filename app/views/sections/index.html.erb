@@ -8,7 +8,7 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           <h4 class="panel-title">
-            <a data-toggle="collapse" href="#collapse<%= index %>"><%= subject.course_code %> - <%= subject.course_name %> </a>
+            <a data-toggle="collapse" href="#collapse<%= index %>"><%= subject.naming %> </a>
           </h4>
         </div>
         <div id="collapse<%= index %>" class="panel-collapse collapse <%= "in" if subject.sections.present? %>">
@@ -21,7 +21,11 @@
                   <%= section.name %> 
                   </div>
                   <div class = 'pull-right'>
+                    <% if section.user.present? %>
                     <%= section.user.username %>
+                    <% else %>
+                    <%= "TBA" %>
+                    <% end %>
                   </div>
                 </div>
                 

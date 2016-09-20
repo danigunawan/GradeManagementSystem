@@ -31,6 +31,9 @@ gem 'devise'
 gem 'bootstrap-sass'
 gem 'simple_form'
 gem 'cancancan'
+gem 'remotipart', github: 'mshibuya/remotipart'
+gem 'rails_admin', '>= 1.0.0.rc'
+gem 'ransack'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

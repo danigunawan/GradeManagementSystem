@@ -1,12 +1,31 @@
+<%= search_form_for @q, :builder => SimpleForm::FormBuilder do |f| %>
+<div class = 'input-group'>
+  <div class="input-group-btn">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span class = 'search_text'>Course Name</span>
+      <span class="caret"></span></button>
+    </button>
+    <ul class="dropdown-menu" id="search_dropdown">
+      <li class="dropdown-item active"><a href="#">Course Name</a><li>
+      <li class="dropdown-item"><a href="#">Course Code</a></li>
+    </ul>
+  </div>
+  <%= f.search_field :course_name_cont, class: 'form-control search_field' %>
+  <div class="input-group-btn">
+    <%= f.submit "Search", class: 'btn btn-primary' %>
+  </div>
+</div>
+<% end %>
+<br>
+
 <% if can? :create, Subject %>
 <%= link_to 'Add Subject', new_subject_path, class: 'btn btn-primary'%>
 <% end %>
 <% if !@subjects.blank? %>
-
 <table class = 'table table-responsive table-striped'>
   <thead>
-    <th>Course Code</th>
-    <th>Course Name</th>
+    <th><%= sort_link(@q, :course_code, 'Course Code', default_order: :desc) %></th>
+    <th><%= sort_link(@q, :course_name, 'Course Name', default_order: :desc) %></th>
     <% if can?(:update, Subject) && can?(:destroy, Subject)%>
     <th colspan = '2'>Actions</th>
     <% end %>
