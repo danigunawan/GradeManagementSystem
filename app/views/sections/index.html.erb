@@ -1,5 +1,33 @@
-<% if can? :create, Section %>
-<%= link_to 'Add Section', new_section_path, class: 'btn btn-primary'%><br><br>
+<%= search_form_for @q, url: home_path, :builder => SimpleForm::FormBuilder do |f| %>
+<div class = 'input-group'>
+  <div class="input-group-btn">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span class = 'search_text'>Course Name</span>
+      <span class="caret"></span></button>
+    </button>
+    <ul class="dropdown-menu" id="search_dropdown">
+      <li class="dropdown-item active"><a href="#">Course Name</a><li>
+      <li class="dropdown-item"><a href="#">Course Code</a></li>
+    </ul>
+  </div>
+  <%= f.search_field :course_name_cont, class: 'form-control search_field' %>
+  <div class="input-group-btn">
+    <%= f.submit "Search", class: 'btn btn-primary' %>
+  </div>
+</div>
+<% end %>
+<br>
+
+<% if can?(:create, Section) || can?(:create, Subject) %>
+  <div style = 'padding-bottom: 20px;'>
+  <% if can? :create, Section %>
+  <%= link_to 'Add Section', new_section_path, class: 'btn btn-primary'%>
+  <% end %>
+
+  <% if can? :create, Subject %>
+  <%= link_to 'Add Subject', new_subject_path, class: 'btn btn-primary'%>
+  <% end %>
+  </div>
 <% end %>
 
 <% if !@subjects.blank? %>
@@ -8,7 +36,22 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           <h4 class="panel-title">
+            <div class = 'col-md-6 col-xs-6 col-sm-6 col-lg-6'>
+              <div class = 'pull-left'>
             <a data-toggle="collapse" href="#collapse<%= index %>"><%= subject.naming %> </a>
+              </div>
+            </div>
+            <div class = 'col-md-6 col-xs-6 col-sm-6 col-lg-6'>
+              <div class = 'pull-right'>
+            <% if can? :update, Subject %>
+            <%= link_to 'Edit', edit_subject_path(subject.id), class: 'btn btn-default'%>
+            <% end %>
+            <% if can? :destroy, Subject %>
+            <%= link_to 'Delete', subject_path(subject.id), method: :delete, class: 'btn btn-danger', data: {confirm: "Are you sure?"}%>
+            <% end %>
+              </div>
+            </div>
+            <div class = 'clearfix'></div>
           </h4>
         </div>
         <div id="collapse<%= index %>" class="panel-collapse collapse <%= "in" if subject.sections.present? %>">

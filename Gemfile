@@ -35,6 +35,11 @@ gem 'remotipart', github: 'mshibuya/remotipart'
 gem 'rails_admin', '>= 1.0.0.rc'
 gem 'ransack'
 
+#flash messages gem
+#gem "messengerjs-rails", "~> 1.4.1" => works only ajax
+#gem 'growlyflash' => can be adjusted to work for ajax and non-ajax requests
+
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

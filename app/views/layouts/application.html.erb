@@ -4,7 +4,7 @@
     <title>Grade Management System</title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>    
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
@@ -15,19 +15,16 @@
               <li class = 'nav-item'>
                 <%= link_to "Edit Account", edit_user_registration_path %>
               </li>
-              <% if can? :read, Subject %>
-              <li class = 'nav-item'>
-                <%= link_to "Subjects", subjects_path %>
-              </li>
-              <% end %>
               <% if can? :read, Section %>
               <li class = 'nav-item'>
-                <%= link_to "Sections", home_path %>
+                <%= link_to "Available Subjects", home_path %>
               </li>
               <% end %>
               <% if can? :read, Registration %>
               <li class = 'nav-item'>
-                <%= link_to "Register Subjects", registrations_path%>
+                <%= link_to registrations_path do %>
+                  <%= current_user.has_role?('student') ? "Register Subjects" : "Teaching Subjects"%>
+                <% end %>
               </li>
               <% end %>
               <li class = 'nav-item'>

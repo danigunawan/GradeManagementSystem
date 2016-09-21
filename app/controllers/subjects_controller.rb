@@ -1,18 +1,14 @@
 class SubjectsController < ApplicationController
   before_action :set_subject, only: [:edit, :update, :destroy]
   load_and_authorize_resource
-  
-  def index
-    @q = Subject.ransack(params[:q])
-    @subjects = @q.result(distinct: true)
-  end
-  
+
   def new
     @subject = Subject.new
   end
   
   def create
     @subject = Subject.create(subject_params)
+    flash[:success] = 'Subject Created'
     redirect_to home_path
   end
   
@@ -21,11 +17,13 @@ class SubjectsController < ApplicationController
   
   def update
     @subject.update(subject_params)
+    flash[:success] = 'Subject Updated'
     redirect_to home_path
   end
   
   def destroy
     @subject.destroy
+    flash[:success] = 'Subject Destroyed'
     redirect_to home_path
   end
   

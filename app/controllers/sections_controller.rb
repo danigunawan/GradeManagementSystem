@@ -3,11 +3,13 @@ class SectionsController < ApplicationController
   load_and_authorize_resource
   
   def index
-    @subjects = Subject.includes(:sections => [:user]).order('sections.name DESC').distinct
+    @q = Subject.ransack(params[:q])
+    @subjects = @q.result.includes(:sections => [:user]).order('sections.name DESC').distinct
   end
   
   def create
     @section = Section.create(section_params)
+    flash[:success] = 'Section Created'
     redirect_to sections_path
   end
   
@@ -16,11 +18,13 @@ class SectionsController < ApplicationController
   
   def update
     @section.update(section_params)
+    flash[:success] = 'Section Updated'
     redirect_to sections_path
   end
   
   def destroy
     @section.destroy
+    flash[:success] = 'Section Deleted'
     redirect_to sections_path
   end
   
