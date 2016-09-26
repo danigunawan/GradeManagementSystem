@@ -10,38 +10,54 @@
 
   <body>
       <div class = 'row'>        
-        <div class = 'col-sm-2 col-md-2 col-lg-2'>
-            <ul class = 'nav nav-pills nav-stacked'>
-              <li class = 'nav-item'>
-                <%= link_to "Edit Account", edit_user_registration_path %>
-              </li>
-              <% if can? :read, Section %>
-              <li class = 'nav-item'>
-                <%= link_to "Available Subjects", home_path %>
-              </li>
-              <% end %>
-              <% if can? :read, Registration %>
-              <li class = 'nav-item'>
-                <%= link_to registrations_path do %>
-                  <%= current_user.has_role?('student') ? "Register Subjects" : "Teaching Subjects"%>
-                <% end %>
-              </li>
-              <% end %>
-              <li class = 'nav-item'>
-                <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-              </li>
-            </ul>
+        <div class = 'col-sm-3 col-md-3 col-lg-3'>
+          
+            <div class = 'list-group'>
+               <%= link_to '#collapseOne', class: 'list-group-item text-center dropdown-toggle', data: {toggle: 'collapse'} do %>
+                Account Management <span class = 'caret'></span>
+               <% end %>
+               <div id="collapseOne" class="panel-collapse collapse">
+                  <%= link_to "Edit Account", edit_user_registration_path, class: 'list-group-item text-center' %>
+                  <%= link_to "Remove Account", remove_account_path, class: 'list-group-item text-center' %>
+                </div>
+               <% if can? :read, Section %> 
+                 <%= link_to "Available Subjects", home_path, class: 'list-group-item text-center' %>
+               <% end %>
+               <% if can? :read, Registration %>
+                 <%= link_to registrations_path, class: 'list-group-item text-center' do %>
+                   <%= current_user.has_role?('student') ? "Register Subjects" : "Teaching Subjects"%>
+                 <% end %>
+               <% end %>
+                 <%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'list-group-item text-center' %>
+            </div>
+          
+            
         </div>
-        <div class = 'col-sm-10 col-md-10 col-lg-10' >
-          <div style = 'padding: 10px;'>
+        <div class = 'col-sm-9 col-md-9 col-lg-9'>
+          <div style = 'padding-top: 10px;'>
             <% unless alert.blank? %>
+            <div class="alert alert-info alert-dismissable">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               <%= alert %>
+            </div>
             <% end %>
             <% unless notice.blank? %>
+            <div class="alert alert-info alert-dismissable">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               <%= notice %>
+            </div>
             <% end %>
             <%= yield %>
           </div>
         </div>
+
+        
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog modal-md" role="document">
+            <div id="show-modal" class="modal-content">
+            </div>
+          </div>
+        </div>
+          
   </body>
 </html>

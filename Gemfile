@@ -34,6 +34,11 @@ gem 'cancancan'
 gem 'remotipart', github: 'mshibuya/remotipart'
 gem 'rails_admin', '>= 1.0.0.rc'
 gem 'ransack'
+gem 'bootswatch-rails'
+#for improved readability of console output
+#usage: "type: ap <rails command> in rails console"
+gem "awesome_print", require:"ap"     
+
 
 #flash messages gem
 #gem "messengerjs-rails", "~> 1.4.1" => works only ajax
@@ -56,6 +61,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'bullet'
+  gem "pry-rails"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

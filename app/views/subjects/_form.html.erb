@@ -1,6 +1,10 @@
 <%= simple_form_for @subject do |f| %>
+<div class="modal-body">
   <%= f.input :course_name, label: 'Course Name' %>
   <%= f.input :course_code, label: 'Course Code' %>
+</div>
+<div class = 'modal-footer'>
   <%= f.button :submit, class: 'btn btn-primary' %>
   <%= link_to "Back", :back, class: 'btn btn-default'%>
+</div>
 <% end %>

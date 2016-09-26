@@ -4,7 +4,7 @@ class RegistrationsController < ApplicationController
   
   def index
     if current_user.has_role?('student')
-      @registrations = Registration.includes(:section => [:subject])
+      @registrations = Registration.includes(:section => [:subject]).where(user_id: current_user.id)
     elsif current_user.has_role?('teacher')
       @registrations = Registration.joins(:section).where("sections.user_id = #{current_user.id}")
     else
@@ -25,9 +25,6 @@ class RegistrationsController < ApplicationController
     @sections = Subject.includes(:sections).find(params[:subject_id]).sections
   end
   
-  def edit_grade
-  end
-    
   def update
     @registration.update(registration_params)
     redirect_to registrations_path

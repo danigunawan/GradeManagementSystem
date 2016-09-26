@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   
   get '/registrations/:id/edit/:subject_id', to: 'registrations#edit', as: 'edit_registration'
   post '/registrations/section_list/:subject_id', to: 'registrations#section_list', as: 'section_list'
-  
-  
+  get '/users/remove_account', to: 'users#remove_account', as: 'remove_account'  
+
   root to: 'sections#index', as: 'home'
 end

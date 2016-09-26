@@ -8,15 +8,27 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class = 'container'>
-      <div class = 'row'>        
-          <% unless alert.blank? %>
-            <%= alert %>
-          <% end %>
-          <% unless notice.blank? %>
-            <%= notice %>
-          <% end %>
-          <%= yield %>
+  <body class = 'body'>
+    <% unless alert.blank? %>
+    <div class="alert alert-warning alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <%= alert %>
+    </div>
+    <% end %>
+    <% unless notice.blank? %>
+    <div class="alert alert-warning alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <%= notice %>
+    </div>
+    <% end %>
+    <div class = 'container padding-top-add'>
+      <div class = 'row'>
+          <div class="col-xs-3 col-xs-offset-3 col-sm-3 col-sm-offeset-3">
+              <div class = 'well'>
+                <%= yield %>
+              </div>
+          </div>
       </div>
+    </div>
   </body>
 </html>

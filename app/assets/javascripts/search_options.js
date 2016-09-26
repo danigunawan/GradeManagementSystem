@@ -1,4 +1,4 @@
-$(document).on('ready page:load page:change', function(){
+$(document).on('turbolinks:load', function(){
   $("#search_dropdown li").on("click", function(event){
     event.preventDefault()
 

@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
          
   has_many :registrations, dependent: :destroy
-  has_many :sections
+  has_many :sections, through: :registrations
   belongs_to :role
   
   validates_presence_of :name, :username

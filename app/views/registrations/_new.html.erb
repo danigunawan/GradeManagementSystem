@@ -1,6 +1,13 @@
-<h2>New Registered Subject</h2>
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h4 class="modal-title" id="myModalLabel">New Registered Subject</h4>
+</div>
 
-  <%= select_tag 'subject', options_from_collection_for_select(@subjects, 'id', 'course_name'), :onchange => "changeOptions()" %>
+
+<div class = 'modal-body'>
+  <%= select_tag 'subject', options_from_collection_for_select(@subjects, 'id', 'course_name'), :onchange => "changeOptions()", class: 'form-control' %>
 
 <%= simple_form_for @registration do |f| %>
   <%= f.input :section_id, collection: {}, label: 'Section', include_blank: false %>
@@ -8,8 +15,12 @@
   <% if current_user.has_role?('teacher') %>
   <%= f.input :grade, label: 'Grade' %>
   <% end %>
+</div>
+
+<div class = 'modal-footer'>
   <%= f.button :submit, class: 'btn btn-primary' %>
   <%= link_to "Back", :back, class: 'btn btn-default'%>
+</div>
 <% end %>
 
 <script>

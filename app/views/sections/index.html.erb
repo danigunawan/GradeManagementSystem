@@ -21,14 +21,15 @@
 <% if can?(:create, Section) || can?(:create, Subject) %>
   <div style = 'padding-bottom: 20px;'>
   <% if can? :create, Section %>
-  <%= link_to 'Add Section', new_section_path, class: 'btn btn-primary'%>
+  <%= link_to 'Add Section', new_section_path, class: 'btn btn-primary', remote: true, data: {toggle: "modal", target: "#myModal"} %>
   <% end %>
 
   <% if can? :create, Subject %>
-  <%= link_to 'Add Subject', new_subject_path, class: 'btn btn-primary'%>
+  <%= link_to 'Add Subject', new_subject_path, class: 'btn btn-primary', remote: true, data: {toggle: "modal", target: "#myModal"} %>
   <% end %>
   </div>
 <% end %>
+<div id = 'modal-display'></div>
 
 <% if !@subjects.blank? %>
     <% @subjects.each_with_index do |subject, index|%>
@@ -44,7 +45,7 @@
             <div class = 'col-md-6 col-xs-6 col-sm-6 col-lg-6'>
               <div class = 'pull-right'>
             <% if can? :update, Subject %>
-            <%= link_to 'Edit', edit_subject_path(subject.id), class: 'btn btn-default'%>
+            <%= link_to 'Edit', edit_subject_path(subject.id), class: 'btn btn-default', remote: true, data: {toggle: "modal", target: "#myModal"}%>
             <% end %>
             <% if can? :destroy, Subject %>
             <%= link_to 'Delete', subject_path(subject.id), method: :delete, class: 'btn btn-danger', data: {confirm: "Are you sure?"}%>
@@ -75,7 +76,7 @@
                 <div class = 'col-md-6 col-xs-6 col-sm-6 col-lg-6'>
                   <div class = 'pull-right'>
                       <% if can? :update, Section %>
-                      <%= link_to 'Edit', edit_section_path(section.id), class: 'btn btn-default'%>
+                      <%= link_to 'Edit', edit_section_path(section.id), class: 'btn btn-default', remote: true, data: {toggle: "modal", target: "#myModal"}%>
                       <% end %>
                       <% if can? :delete, Section %>
                       <%= link_to 'Delete', section_path(section.id), method: :delete, class: 'btn btn-danger', data: {confirm: "Are you sure?"}%><br>

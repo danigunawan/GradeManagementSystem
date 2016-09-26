@@ -8,7 +8,7 @@ class SubjectsController < ApplicationController
   
   def create
     @subject = Subject.create(subject_params)
-    flash[:success] = 'Subject Created'
+    flash[:alert] = 'Subject Created'
     redirect_to home_path
   end
   
@@ -17,13 +17,13 @@ class SubjectsController < ApplicationController
   
   def update
     @subject.update(subject_params)
-    flash[:success] = 'Subject Updated'
+    flash[:alert] = 'Subject Updated'
     redirect_to home_path
   end
   
   def destroy
     @subject.destroy
-    flash[:success] = 'Subject Destroyed'
+    flash[:alert] = 'Subject Destroyed'
     redirect_to home_path
   end
   

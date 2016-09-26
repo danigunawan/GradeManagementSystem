@@ -1,5 +1,5 @@
 <% if can? :create, Registration %>
-<%= link_to 'Add Registered Subject', new_registration_path, class: 'btn btn-primary'%>
+<%= link_to 'Add Registered Subject', new_registration_path, class: 'btn btn-primary', remote: true, data: {toggle: 'modal', target: '#myModal'}%>
 <% end %>
 <% if !@registrations.blank? %>
 <table class = 'table table-responsive table-striped'>
@@ -19,7 +19,7 @@
     <td><%= register.section.name %></td>
     <td><%= register.grade.blank? ? "Unavailable" : register.grade.to_s %></td>
     <% if can? :update, Registration %>
-    <td><%= link_to 'Edit', edit_registration_path(register.id, register.section.subject_id), class: 'btn btn-default'%>
+    <td><%= link_to 'Edit', edit_registration_path(register.id, register.section.subject_id), class: 'btn btn-default', remote: true, data: {toggle: 'modal', target: '#myModal'}%>
     <% end %>
     <% if can? :destroy, Registration %>
     <%= link_to 'Delete', registration_path(register.id), method: :delete, class: 'btn btn-danger', data: {confirm: "Are you sure?"}%>
